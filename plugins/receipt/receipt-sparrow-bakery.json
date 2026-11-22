@@ -1,0 +1,6 @@
+{
+  "repo": "finch-xu/cc-router",
+  "path": "examples/plugins/receipt-sparrow-bakery",
+  "tags": ["receipt:shop", "cute", "warm"],
+  "versions": [{ "commit": "5fcda12200e745c380f29e74b6d4b1696d28fceb" }]
+}
