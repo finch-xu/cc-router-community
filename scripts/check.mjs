@@ -196,6 +196,14 @@ async function checkEntry(type, file) {
   };
 }
 
+// agent-skills 里的副本必须与正本一致 (两个 skill 各带一份校验脚本与格式参考)
+const SYNC = [
+  ["docs/theme-api.md", "agent-skills/skills/cc-router-theme/references/theme-api.md"],
+  ["docs/receipt-api.md", "agent-skills/skills/cc-router-receipt/references/receipt-api.md"],
+  ["agent-skills/skills/cc-router-theme/scripts/validate.mjs", "agent-skills/skills/cc-router-receipt/scripts/validate.mjs"],
+];
+const syncErrors = SYNC.filter(([a, b]) => !existsSync(join(ROOT, b)) || readFileSync(join(ROOT, a), "utf8") !== readFileSync(join(ROOT, b), "utf8"));
+
 const results = [];
 for (const type of SUPPORTED_TYPES) {
   const dir = join(ROOT, "plugins", type);
@@ -220,7 +228,12 @@ const report = lines.join("\n");
 console.log(report);
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${report}\n`);
 
-const failed = results.filter((r) => r.errors.length);
+for (const [a, b] of syncErrors) {
+  const msg = `❌ ${b} 与 ${a} 不一致 (改了正本要同步副本)`;
+  console.log(msg);
+  if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${msg}\n`);
+}
+const failed = [...results.filter((r) => r.errors.length), ...syncErrors];
 if (WRITE) {
   // 合并后: 有问题的条目不进目录 (不阻断其他条目发布)
   const plugins = results.filter((r) => r.index).map((r) => JSON.parse(JSON.stringify(r.index)));

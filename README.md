@@ -25,6 +25,28 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 
 `index.json` 由 CI 自动生成，请不要手改。
 
+## 让 AI 帮你做插件
+
+本仓库同时是一个 Claude Code 插件市场，里面的 **cc-router 插件工具包** 带三个 skill，按需自动启用：
+
+| skill | 用途 |
+|---|---|
+| `cc-router-theme` | 做界面主题：定配色、写 `theme.json`、查对比度、生成浅深两色预览 |
+| `cc-router-receipt` | 做小票主题：写模板和样式，用样例数据在三种显示设置下各渲染一张预览 |
+| `cc-router-submit` | 把做好的插件推到 GitHub、固定提交号、向本仓库提 PR；也负责发新版本 |
+
+在 Claude Code 里安装：
+
+```
+/plugin install cc-router-plugin-kit --marketplace finch-xu/cc-router-community
+```
+
+较早的 Claude Code 分两步：`/plugin marketplace add finch-xu/cc-router-community`，再 `/plugin install cc-router-plugin-kit@cc-router-community`。
+
+装好后直接说「帮我做一个森林绿的 cc-router 主题」或「做一张火车票样式的小票」即可。skill 自带的校验脚本跑的是 cc-router **同一份**校验代码（首次运行会把它浅克隆到 `~/.cache/cc-router-plugin-kit/`，需要 git 与 Node 22.18+），所以脚本通过就等于 app 与本仓库的 CI 也会通过。
+
+用其他支持 Agent Skills 的 AI 工具：把 [`agent-skills/skills/`](agent-skills/skills/) 下的文件夹复制到该工具的 skills 目录即可。
+
 ## 做一个主题
 
 1. 新建一个**公开**的 GitHub 仓库，根目录（或某个子目录）放两个文件：

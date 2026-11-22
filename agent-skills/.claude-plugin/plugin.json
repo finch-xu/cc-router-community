@@ -1,0 +1,10 @@
+{
+  "name": "cc-router-plugin-kit",
+  "version": "1.0.0",
+  "description": "Skills for making cc-router plugins: UI themes, receipt themes, and submitting them to the cc-router community catalog.",
+  "author": { "name": "cc-router", "url": "https://github.com/finch-xu/cc-router" },
+  "homepage": "https://github.com/finch-xu/cc-router-community",
+  "repository": "https://github.com/finch-xu/cc-router-community",
+  "license": "MIT",
+  "keywords": ["cc-router", "theme", "receipt", "plugin"]
+}

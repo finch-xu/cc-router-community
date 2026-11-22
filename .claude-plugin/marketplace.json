@@ -1,0 +1,14 @@
+{
+  "name": "cc-router-community",
+  "owner": { "name": "cc-router", "url": "https://github.com/finch-xu/cc-router" },
+  "metadata": {
+    "description": "Tools for the cc-router plugin community."
+  },
+  "plugins": [
+    {
+      "name": "cc-router-plugin-kit",
+      "source": "./agent-skills",
+      "description": "Make cc-router UI themes and receipt themes with your AI assistant, validate them with the same code the app uses, and submit them to the community catalog."
+    }
+  ]
+}

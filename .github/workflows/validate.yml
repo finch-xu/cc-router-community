@@ -2,7 +2,7 @@ name: validate
 
 on:
   pull_request:
-    paths: ["plugins/**", "media/**", "schema/**", "scripts/**"]
+    paths: ["plugins/**", "media/**", "schema/**", "scripts/**", "docs/**", "agent-skills/**", ".claude-plugin/**"]
 
 permissions:
   contents: read

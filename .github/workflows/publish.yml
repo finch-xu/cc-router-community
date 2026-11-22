@@ -3,7 +3,7 @@ name: publish
 on:
   push:
     branches: [main]
-    paths: ["plugins/**", "media/**", "schema/**", "scripts/**"]
+    paths: ["plugins/**", "media/**", "schema/**", "scripts/**", "docs/**", "agent-skills/**", ".claude-plugin/**"]
   workflow_dispatch:
 
 permissions:
