@@ -52,7 +52,7 @@ app 提供的三个元素：
 
 | 元素 | 属性 |
 |---|---|
-| `<ccr-qr></ccr-qr>` | `size` 40–200，二维码（指向 ccrouter.app），颜色跟随 CSS `color` |
+| `<ccr-qr></ccr-qr>` | `size` 40–200，官网识别码，颜色跟随 CSS `color`。**跟随用户在小票页选的「底部识别码」**：默认画成条形码（高度约为 `size` 的一半），用户选了二维码才画二维码——二维码分享到部分平台会被屏蔽 |
 | `<ccr-barcode></ccr-barcode>` | `height` 20–120，条形码，颜色跟随 CSS `color` |
 | `<ccr-logo></ccr-logo>` | `size` 16–128，cc-router logo（渲染为 `<img>`） |
 
@@ -69,13 +69,16 @@ app 提供的三个元素：
 | `receipt.issued` / `receipt.start` / `receipt.end` | 时间，各自有 `.Y` `.YY` `.M` `.D` `.h` `.m` `.s` `.date`（`2026-11-22`）`.time`（`09:30`）`.weekday`（`SUN`…） |
 | `receipt.version` / `receipt.port` / `receipt.site` | app 版本、代理端口、`ccrouter.app` |
 | `total.*` | 全部合计，见下方「用量」 |
-| `groups` | 列表，每项是一个虚拟模型 |
+| `groups` | 列表，**按用户在小票页选的聚合方式分组**（见下） |
+| `options.*` | 用户在小票页的显示设置：`compact` `showCache` `showRequests` `groupMode`（`virtual_model` / `subscription` / `totals_only`），以及三个布尔 `byVirtualModel` `bySubscription` `totalsOnly` |
+
+**分组跟随设置**：按虚拟模型（默认）= 每组一个虚拟模型；按订阅 = 每组一个订阅、行是它用过的模型；只看合计 = 两组 `BY SUBSCRIPTION` / `BY MODEL`，前者的行没有 `model`、后者的行没有 `provider` / `subscription`（为空字符串，可以用 `{{#if}}` 判断）。
 
 **`groups` 的每一项**：`key`（`model-opus`）、`name`（`MODEL-OPUS`）、`empty`（这一组没有用量）、`multi`（不止一行）、`subtotal.*`（用量）、`lines`（列表）。
 
 **`lines` 的每一项**：`model`（真实模型名）、`provider`（厂商）、`subscription`（订阅名；已删除的订阅显示为界面语言的「已删除订阅」）、`deleted`，以及用量字段。
 
-**用量**（`total.*`、`subtotal.*`、每一行都有）：`requests`、`input`、`output`、`cacheWrite`、`cacheRead`、`tokens`（四项合计）、`hasCache`，以及 `inputFull` `outputFull` `cacheWriteFull` `cacheReadFull` `tokensFull`。
+**用量**（`total.*`、`subtotal.*`、每一行都有；默认字段跟随「紧凑 token」设置，`*Full` 永远是全写；用户关掉缓存时 `hasCache` 恒为假，用户关掉请求数时请自己用 `{{#if options.showRequests}}` 包住）：`requests`、`input`、`output`、`cacheWrite`、`cacheRead`、`tokens`（四项合计）、`hasCache`，以及 `inputFull` `outputFull` `cacheWriteFull` `cacheReadFull` `tokensFull`。
 
 ## HTML 规则
 
