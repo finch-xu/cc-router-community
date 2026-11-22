@@ -1,6 +1,6 @@
 ---
 name: cc-router-submit
-description: Publish a finished cc-router plugin (UI theme, receipt theme or provider) to the cc-router community catalog, or release a new version of one — push it to a public GitHub repo, pin a commit, and open a pull request to finch-xu/cc-router-community with the catalog entry, tags and screenshots. Use when the user wants to share, publish, submit, list, 上架, 提交, or update their cc-router theme, receipt or provider plugin in the community store.
+description: Publish a finished cc-router plugin (UI theme, receipt theme, provider or pricing table) to the cc-router community catalog, or release a new version of one — push it to a public GitHub repo, pin a commit, and open a pull request to finch-xu/cc-router-community with the catalog entry, tags and screenshots. Use when the user wants to share, publish, submit, list, 上架, 提交, or update their cc-router theme, receipt or provider plugin in the community store.
 ---
 
 # Submit a cc-router plugin to the community
@@ -10,7 +10,7 @@ The community catalog ([finch-xu/cc-router-community](https://github.com/finch-x
 ## Before you start
 
 1. The plugin must pass validation. Run the `validate.mjs` from the `cc-router-theme` or `cc-router-receipt` skill and make sure it prints `✅`.
-   For a provider plugin (`"type": "provider"`), run the Rust checker instead (needs Rust): `git clone --depth 1 https://github.com/finch-xu/cc-router && cargo run --release --manifest-path cc-router/src-tauri/Cargo.toml -p cc-router-plugin-spec --bin ccr-plugin-check -- <plugin-dir>` and make sure it prints `"ok": true`. See `docs/provider-api.md` in the community repo.
+   For a provider or pricing plugin (`"type": "provider"` / `"pricing"`), run the Rust checker instead (needs Rust): `git clone --depth 1 https://github.com/finch-xu/cc-router && cargo run --release --manifest-path cc-router/src-tauri/Cargo.toml -p cc-router-plugin-spec --bin ccr-plugin-check -- <plugin-dir>` and make sure it prints `"ok": true`. See `docs/provider-api.md` / `docs/pricing-api.md` in the community repo.
 2. The plugin must live in a **public** GitHub repo, at the repo root or in a subfolder.
 3. You need the **full 40-character commit SHA** that contains the version to publish (`git rev-parse HEAD` after pushing).
 
@@ -18,7 +18,7 @@ If the plugin isn't in a repo yet, help the user create one. With the GitHub CLI
 
 ## The catalog entry
 
-Create `plugins/<type>/<id>.json` in the community repo. `<type>` is `theme`, `receipt` or `provider`, and the file name must equal the manifest `id`:
+Create `plugins/<type>/<id>.json` in the community repo. `<type>` is `theme`, `receipt`, `provider` or `pricing`, and the file name must equal the manifest `id`:
 
 ```json
 {

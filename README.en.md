@@ -20,6 +20,7 @@ Plugin types available today:
 | UI theme | `plugins/theme/` | colors, shapes, textures, fonts |
 | Receipt theme | `plugins/receipt/` | HTML template + CSS + fonts, see [docs/receipt-api.md](docs/receipt-api.md) |
 | Provider | `plugins/provider/` | A provider description in the same format as cc-router's built-in providers, see [docs/provider-api.md](docs/provider-api.md) (Chinese); needs a cc-router version with provider plugin support |
+| Pricing | `plugins/pricing/` | A price table used to estimate costs, see [docs/pricing-api.md](docs/pricing-api.md) (Chinese); cc-router itself ships no prices |
 
 **Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied. Receipts are restricted HTML templates + CSS that can only read a published table of data fields ([docs/receipt-api.md](docs/receipt-api.md)). A provider plugin is a provider description checked by cc-router's Rust checker; before installing, users see which domains will receive the API key they enter.
 
@@ -103,7 +104,7 @@ For provider plugins, set `"type": "provider"` and `"entry": "provider.yaml"`, a
 ## Submitting
 
 1. Fork this repo.
-2. Add `plugins/theme/<id>.json` (receipts go in `plugins/receipt/<id>.json`, providers in `plugins/provider/<id>.json`):
+2. Add `plugins/theme/<id>.json` (receipts go in `plugins/receipt/<id>.json`, providers in `plugins/provider/<id>.json`, pricing in `plugins/pricing/<id>.json`):
 
    ```json
    {

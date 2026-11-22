@@ -8,7 +8,7 @@
 // 与 app 安装时跑的是同一份代码, 两边不会对不上。需要 Node 22.18+ (原生 TS type stripping)。
 // 环境变量 CC_ROUTER_DIR 可指向本地的 cc-router 检出 (默认 ./.cc-router)。
 //
-// 系统插件 (目前是厂商插件 `provider`) 的内容由 cc-router 的 Rust 检查器校验 (app 安装时同一份规则):
+// 系统插件 (厂商插件 `provider`、计价插件 `pricing`) 的内容由 cc-router 的 Rust 检查器校验 (app 安装时同一份规则):
 // 环境变量 CCR_PLUGIN_CHECK 指向编好的 `ccr-plugin-check` 二进制 (CI 只在有厂商条目时才编译它)。
 import { registerHooks } from "node:module";
 import { appendFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
@@ -49,7 +49,7 @@ const BIG = 8 * 1024 * 1024;
 const isObj = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
 
 /** 由 Rust 校验内容的类型 (与 cc-router `plugin.rs::SYSTEM_TYPES` 一致)。 */
-const RUST_CHECKED = ["provider"];
+const RUST_CHECKED = ["provider", "pricing"];
 
 /**
  * 把下载到的包写进临时目录, 交给 `ccr-plugin-check`。返回 { errors, keyHosts }。
@@ -73,7 +73,7 @@ function rustCheck(files) {
     }
     const errors = (out.issues ?? []).map((i) => `${i.path || "(root)"}: ${i.code}${i.detail ? ` (${i.detail})` : ""}`);
     if (out.ok === false && errors.length === 0) errors.push("Rust 检查器判定不通过");
-    return { errors, keyHosts: out.capabilities?.key_hosts ?? [] };
+    return { errors, keyHosts: out.capabilities?.key_hosts ?? [], capabilities: out.capabilities };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -211,6 +211,10 @@ async function checkEntry(type, file) {
     // 给审核员看: 用户填的 API Key 会发往哪里 (与 app 安装确认框里显示的同一份)
     for (const h of r.keyHosts) {
       warnings.push(`API Key 会发往 ${h.host} (${h.used_for.join(" / ")})${h.differs_from_messages ? " — 与对话地址不同, 请审核" : ""}`);
+    }
+    const caps = r.capabilities;
+    if (caps?.kind === "pricing") {
+      warnings.push(`价格表 ${caps.currency}, ${caps.rules} 条, 覆盖: ${caps.providers.join(", ")} — 请抽查几条价格是否与厂商官网一致`);
     }
   }
   const size = Object.values(files).reduce((n, b) => n + b.length, 0);
