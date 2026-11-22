@@ -11,7 +11,7 @@
     {
       "name": "cc-router-plugin-kit",
       "source": "./agent-skills",
-      "description": "Make cc-router UI themes and receipt themes with your AI assistant, validate them with the same code the app uses, and submit them to the community catalog."
+      "description": "Make cc-router plugins (UI themes, receipt themes, providers, pricing tables, rules, and notifiers) with your AI assistant, validate them with the same code the app uses, and submit them to the community catalog."
     }
   ]
 }

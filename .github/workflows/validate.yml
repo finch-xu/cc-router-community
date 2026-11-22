@@ -19,6 +19,7 @@ jobs:
           path: .cc-router
           sparse-checkout: |
             src/plugins
+            src/lib
             scripts/lib
       - uses: actions/setup-node@v4
         with:

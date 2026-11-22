@@ -1,0 +1,8 @@
+{
+  "repo": "finch-xu/cc-router",
+  "path": "examples/plugins/notifier-ntfy",
+  "tags": ["notifier:mobile", "notifier:self-hosted"],
+  "versions": [
+    { "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d" }
+  ]
+}

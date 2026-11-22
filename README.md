@@ -40,12 +40,16 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 
 ## 让 AI 帮你做插件
 
-本仓库同时是一个 Claude Code 插件市场，里面的 **cc-router 插件工具包** 带三个 skill，按需自动启用：
+本仓库同时是一个 Claude Code 插件市场，里面的 **cc-router 插件工具包** 带七个 skill，按需自动启用：
 
 | skill | 用途 |
 |---|---|
 | `cc-router-theme` | 做界面主题：定配色、写 `theme.json`、查对比度、生成浅深两色预览 |
 | `cc-router-receipt` | 做小票主题：写模板和样式，用样例数据在三种显示设置下各渲染一张预览 |
+| `cc-router-provider` | 做厂商插件：写 `provider.yaml` 与声明式余额查询，用 `ccr-plugin-check` 校验域名与格式 |
+| `cc-router-pricing` | 做计价插件：写 `pricing.json` 价格表，校验币种与匹配规则 |
+| `cc-router-rules` | 做规则插件：写 `rules.json` 路由与改写规则，校验条件与动作白名单 |
+| `cc-router-notifier` | 做通知插件：写 `notifier.json` HTTP 推送模板，校验域名与字段白名单 |
 | `cc-router-submit` | 把做好的插件推到 GitHub、固定提交号、向本仓库提 PR；也负责发新版本 |
 
 在 Claude Code 里安装：
