@@ -1,6 +1,15 @@
-<p align="center">
-  <img src="assets/readme-banner.svg" alt="cc-router 社区 · Sparrow Bakery 麻雀面包坊" width="880">
-</p>
+<table align="center">
+  <tr>
+    <td align="center" valign="bottom" width="300">
+      <img src="assets/cc-router-logo.svg" alt="cc-router" height="120"><br>
+      <b>cc-router 社区</b>
+    </td>
+    <td align="center" valign="bottom" width="300">
+      <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="260"><br>
+      <b>麻雀面包坊</b>
+    </td>
+  </tr>
+</table>
 
 <p align="center"><a href="README.en.md">English</a></p>
 
