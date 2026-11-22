@@ -2,10 +2,12 @@
   <img src="assets/header-cc-router.svg" alt="cc-router" width="300" height="130">&emsp;<img src="assets/header-divider.svg" alt="" width="2" height="130">&emsp;<img src="assets/header-sparrow-bakery.svg" alt="Sparrow Bakery" width="300" height="130">
 </p>
 <p align="center">
-  <b>cc-router 社区</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;<b>麻雀面包坊</b>&emsp;&nbsp;
+  <b>cc-router 社区创作中心</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>麻雀面包坊</b>&emsp;&emsp;&emsp;
 </p>
 
-<p align="center"><a href="README.en.md">English</a></p>
+<p align="center">
+  <strong>中文</strong> · <a href="README.en.md">English</a> · <a href="README.ja.md">日本語</a>
+</p>
 
 # Sparrow Bakery
 

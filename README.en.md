@@ -2,10 +2,12 @@
   <img src="assets/header-cc-router.svg" alt="cc-router" width="300" height="130">&emsp;<img src="assets/header-divider.svg" alt="" width="2" height="130">&emsp;<img src="assets/header-sparrow-bakery.svg" alt="Sparrow Bakery" width="300" height="130">
 </p>
 <p align="center">
-  <b>cc-router Community</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;<b>Sparrow Bakery</b>&emsp;&ensp;
+  <b>cc-router Community Creator Hub</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>Sparrow Bakery</b>&emsp;&emsp;&emsp;&emsp;
 </p>
 
-<p align="center"><a href="README.md">中文</a></p>
+<p align="center">
+  <a href="README.md">中文</a> · <strong>English</strong> · <a href="README.ja.md">日本語</a>
+</p>
 
 # Sparrow Bakery
 
@@ -18,14 +20,14 @@ Plugin types available today:
 | UI theme | `plugins/theme/` | colors, shapes, textures, fonts |
 | Receipt theme | `plugins/receipt/` | HTML template + CSS + fonts, see [docs/receipt-api.md](docs/receipt-api.md) |
 
-**Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied.
+**Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied. Receipts are restricted HTML templates + CSS that can only read a published table of data fields ([docs/receipt-api.md](docs/receipt-api.md)).
 
 ## What lives here
 
 Only **pointers** and showcase images; the plugin itself stays in your own repository:
 
 ```
-plugins/theme/<plugin id>.json   ← your repo + commit + tags
+plugins/theme/<plugin id>.json   ← your repo + commit + tags (receipts go in plugins/receipt/)
 media/<plugin id>/logo.png       ← optional, ≤ 100 KB
 media/<plugin id>/shot-1.png     ← optional, ≤ 500 KB each, up to 4
 ```
@@ -56,13 +58,44 @@ Using another AI tool that supports Agent Skills? Copy the folders under [`agent
 
 ## Making a theme
 
-1. Create a **public** GitHub repo with two files at its root (or in a subfolder): `cc-router-plugin.json` (the manifest) and `theme.json` (the theme). See the Chinese README for annotated examples, [docs/theme-api.md](docs/theme-api.md) for every token, and [`examples/plugins/sparrow-sun`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/sparrow-sun) in the cc-router repo for a complete one.
-2. Debug locally: cc-router → **Plugins** → **Load from folder**, then **Try on** before installing.
+1. Create a **public** GitHub repository with two files at its root (or in a subfolder):
+
+   `cc-router-plugin.json` (plugin manifest)
+
+   ```json
+   {
+     "manifest": 1,
+     "id": "my-theme",
+     "type": "theme",
+     "version": "1.0.0",
+     "name": { "en": "My Theme", "zh": "我的主题" },
+     "description": { "en": "One-line description", "zh": "一句话介绍" },
+     "author": "your-github-name",
+     "license": "MIT",
+     "entry": "theme.json",
+     "assets": []
+   }
+   ```
+
+   `theme.json` (the theme itself; see [docs/theme-api.md](docs/theme-api.md) for every token)
+
+   ```json
+   {
+     "themeApi": 1,
+     "base": "quiet",
+     "light": { "colors": { "canvas": "#fffaf1", "accent": "#b9501c" } },
+     "dark":  { "colors": { "canvas": "#1e1813", "accent": "#ff9a5c" } }
+   }
+   ```
+
+   Full example: [`examples/plugins/sparrow-sun`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/sparrow-sun) in the cc-router repo (the plugin version of the built-in Sparrow theme).
+
+2. Debug locally: cc-router → **Plugins** → **Load from folder**, select your folder, then **Try on** before installing.
 3. After pushing, try **Install from link** with `https://github.com/you/repo/tree/<commit>` — the same path users take.
 
 `id`: lowercase letters, digits and hyphens (2–40 chars), not a built-in theme name.
 
-Receipt plugins use `"type": "receipt"` and `"entry": "receipt.json"`; see [docs/receipt-api.md](docs/receipt-api.md) and [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery).
+For receipt plugins, set `"type": "receipt"` and `"entry": "receipt.json"`, and write the template and styles per [docs/receipt-api.md](docs/receipt-api.md); full example: [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery) in the cc-router repo. The install confirmation dialog renders a preview using sample data.
 
 ## Submitting
 
@@ -71,20 +104,33 @@ Receipt plugins use `"type": "receipt"` and `"entry": "receipt.json"`; see [docs
 
    ```json
    {
-     "repo": "you/my-theme",
+     "repo": "your-github-name/my-theme",
      "tags": ["warm", "light"],
      "versions": [{ "commit": "<full 40-character commit SHA>" }]
    }
    ```
 
-   Add `"path": "subfolder"` if the repo holds several plugins. Pick tags from [`schema/tags.json`](schema/tags.json) (max 5); new tags can be added in the same PR.
+   - Add `"path": "subfolder"` if the repo holds several plugins.
+   - Pick tags from [`schema/tags.json`](schema/tags.json) (max 5); new tags can be added in the same PR.
 3. Optionally add `media/<id>/logo.png` and `media/<id>/shot-1.png`… (png / jpg / webp).
 4. Open a PR. CI downloads the files at your commit and checks them with **the same validator the app uses**; results appear in the PR's check summary.
 
-Name, description and version come from your manifest; CI computes the package hash.
+Name, description and version come from your manifest — no need to repeat them here; CI also computes the package hash.
 
-**New versions:** bump `version` in your manifest, then open a PR appending the new commit to the **end** of `versions`.
+### Publishing a new version
+
+Update your repo and bump `version` in the manifest, then open a PR appending the new commit to the **end** of `versions`. Users who have already installed it will see an **Update** badge on the Plugins page.
 
 ## Rules
 
-Public repos only; an open-source license is recommended. Don't impersonate cc-router or other brands. Screenshots must show the real theme. Font licensing is the author's responsibility. Problematic plugins are withdrawn with `"revoked": "reason"`, and the app notifies users who installed them.
+- Must be a public repository; an open-source license is recommended.
+- Do not impersonate cc-router official plugins or other brands in name or logo.
+- Screenshots must show the actual theme.
+- Font licensing is the author's responsibility.
+- Plugins that violate the rules or have issues will be taken down by setting `"revoked": "reason"`, and the app will notify users who installed them.
+
+## Security
+
+- When installed, the app pins the exact commit you listed and verifies the content hash; later changes to your repo will not silently affect installed users.
+- Every theme value must pass a syntax allowlist (colors, lengths, shadows, etc.), images and fonts must come from inside the plugin package, and SVGs cannot contain scripts or external links.
+- Users can also bypass this catalog and use **Install from link** for any repository directly; the app will warn that it is unreviewed by the community.
