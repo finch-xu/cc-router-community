@@ -34,8 +34,9 @@ function ccRouterDir() {
     if (!existsSync(join(cache, ".git"))) {
       mkdirSync(join(cache, ".."), { recursive: true });
       git("clone", "--quiet", "--depth", "1", "--filter=blob:none", "--sparse", "https://github.com/finch-xu/cc-router.git", cache);
-      git("-C", cache, "sparse-checkout", "set", "src/plugins", "scripts/lib");
+      git("-C", cache, "sparse-checkout", "set", "src/plugins", "src/lib", "scripts/lib");
     } else {
+      git("-C", cache, "sparse-checkout", "set", "src/plugins", "src/lib", "scripts/lib");
       git("-C", cache, "pull", "--quiet", "--ff-only");
     }
   } catch (e) {

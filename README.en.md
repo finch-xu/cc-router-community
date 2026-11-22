@@ -40,12 +40,16 @@ media/<plugin id>/shot-1.png     ← optional, ≤ 500 KB each, up to 4
 
 ## Let AI build it for you
 
-This repo is also a Claude Code plugin marketplace. Its **cc-router plugin kit** ships three skills that load on demand:
+This repo is also a Claude Code plugin marketplace. Its **cc-router plugin kit** ships seven skills that load on demand:
 
 | Skill | What it does |
 |---|---|
 | `cc-router-theme` | Builds a UI theme: palette, `theme.json`, contrast checks, and a light/dark preview |
 | `cc-router-receipt` | Builds a receipt theme: template and CSS, plus previews with sample data under three display settings |
+| `cc-router-provider` | Builds a provider plugin (`provider.yaml`) and validates key-receiving domains via `ccr-plugin-check` |
+| `cc-router-pricing` | Builds a pricing table (`pricing.json`) for USD/CNY cost estimation |
+| `cc-router-rules` | Builds a declarative routing/rewriting rules plugin (`rules.json`) |
+| `cc-router-notifier` | Builds a declarative HTTP push notifier plugin (`notifier.json`) |
 | `cc-router-submit` | Pushes a finished plugin to GitHub, pins the commit, and opens the PR here; also handles new versions |
 
 Install it in Claude Code:

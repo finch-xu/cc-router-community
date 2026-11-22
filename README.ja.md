@@ -40,12 +40,16 @@ media/<プラグイン id>/shot-1.png      ← 任意、各 500 KB 以下、最�
 
 ## AI にプラグインを作ってもらう
 
-このリポジトリは Claude Code のプラグインマーケットプレイスも兼ねています。含まれている **cc-router プラグインキット** には 3 つの skill が入っており、必要に応じて自動で有効になります：
+このリポジトリは Claude Code のプラグインマーケットプレイスも兼ねています。含まれている **cc-router プラグインキット** には 7 つの skill が入っており、必要に応じて自動で有効になります：
 
 | skill | 用途 |
 |---|---|
 | `cc-router-theme` | UIテーマを作成：配色の設計、`theme.json` の記述、コントラスト比チェック、ライト／ダーク両方のプレビュー生成 |
 | `cc-router-receipt` | レシートテーマを作成：テンプレートと CSS を記述し、サンプルデータで 3 通りの表示設定それぞれのプレビューを生成 |
+| `cc-router-provider` | プロバイダープラグイン（`provider.yaml`）を作成し、`ccr-plugin-check` で送信先ドメインと形式を検証 |
+| `cc-router-pricing` | 料金プラグイン（`pricing.json`）を作成し、通貨やモデル一致ルールを検証 |
+| `cc-router-rules` | ルールプラグイン（`rules.json`）を作成し、条件とアクションの許可リストを検証 |
+| `cc-router-notifier` | 通知プラグイン（`notifier.json`）を作成し、送信先ドメインとフィールド許可リストを検証 |
 | `cc-router-submit` | 完成したプラグインを GitHub にプッシュし、コミットを固定してこのリポジトリへ PR を作成。新バージョンの公開にも対応 |
 
 Claude Code でインストール：

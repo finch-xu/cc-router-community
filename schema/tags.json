@@ -105,6 +105,31 @@
       "id": "provider:local",
       "zh": "本地模型",
       "en": "Local models"
+    },
+    {
+      "id": "rules:routing",
+      "zh": "智能路由",
+      "en": "Smart routing"
+    },
+    {
+      "id": "rules:privacy",
+      "zh": "隐私脱敏",
+      "en": "Privacy & redaction"
+    },
+    {
+      "id": "notifier:mobile",
+      "zh": "手机推送",
+      "en": "Mobile push"
+    },
+    {
+      "id": "notifier:chat",
+      "zh": "群聊机器人",
+      "en": "Chat bot"
+    },
+    {
+      "id": "notifier:self-hosted",
+      "zh": "支持自建",
+      "en": "Self-hosted"
     }
   ]
 }

@@ -220,7 +220,8 @@ async function checkEntry(type, file) {
       warnings.push(`规则 ${caps.rules} 条 · 钩子: ${(caps.hooks ?? []).join(", ")} · 动作: ${(caps.actions ?? []).join(", ")}${redir}`);
     } else if (caps?.kind === "notifier") {
       const hosts = [...(caps.hosts ?? []), ...(caps.base_url_params ?? []).map((p) => `{{params.${p}}}`)].join(", ");
-      warnings.push(`目标: ${hosts} · 事件: ${(caps.events ?? []).join(", ")} · 字段: ${(caps.fields ?? []).join(", ")}`);
+      const fields = caps.fields?.length ? ` · 字段: ${caps.fields.join(", ")}` : "";
+      warnings.push(`目标: ${hosts} · 事件: ${(caps.events ?? []).join(", ")}${fields}`);
     }
   }
   const size = Object.values(files).reduce((n, b) => n + b.length, 0);
