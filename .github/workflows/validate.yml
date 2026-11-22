@@ -23,12 +23,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      # 系统插件 (厂商 / 计价插件) 的内容由 cc-router 的 Rust 检查器校验, 与 app 安装时同一份规则。
+      # 系统插件 (厂商 / 计价 / 规则 / 通知) 的内容由 cc-router 的 Rust 检查器校验, 与 app 安装时同一份规则。
       # 只有目录里有这类条目时才编译它 (完整检出 cc-router, 只编 cc-router-plugin-spec 这个小 crate)。
       - name: need rust checker?
         id: rust
         run: |
-          if [ -n "$(find plugins/provider plugins/pricing -maxdepth 1 -name '*.json' 2>/dev/null)" ]; then echo "needed=true" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$(find plugins/provider plugins/pricing plugins/rules plugins/notifier -maxdepth 1 -name '*.json' 2>/dev/null)" ]; then echo "needed=true" >> "$GITHUB_OUTPUT"; fi
       - if: steps.rust.outputs.needed == 'true'
         uses: actions/checkout@v4
         with:

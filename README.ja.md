@@ -21,6 +21,8 @@
 | レシートテーマ | `plugins/receipt/` | HTML テンプレート + CSS + フォント（仕様は [docs/receipt-api.md](docs/receipt-api.md) を参照） |
 | プロバイダー | `plugins/provider/` | cc-router 内蔵プロバイダーと同じ形式のプロバイダー記述（仕様は [docs/provider-api.md](docs/provider-api.md)、中国語）。プロバイダープラグインに対応した cc-router が必要です |
 | 料金 | `plugins/pricing/` | 費用の見積もりに使う料金表（仕様は [docs/pricing-api.md](docs/pricing-api.md)、中国語）。cc-router 自体は価格を持ちません |
+| ルール | `plugins/rules/` | リクエストの振り分け・パラメータ調整・伏せ字置換を行う宣言的ルール（仕様は [docs/rules-api.md](docs/rules-api.md)、中国語） |
+| 通知 | `plugins/notifier/` | アラートや日次サマリーをスマホやチャットへ送る宣言的 HTTP 通知テンプレート（仕様は [docs/notifier-api.md](docs/notifier-api.md)、中国語） |
 
 **プラグインに含まれるのはデータのみで、コードは一切実行されません。** テーマは公開済みのトークン表（[docs/theme-api.md](docs/theme-api.md) を参照）を埋めるだけで、CSS セレクタの記述・ネットワーク通信・スクリプト実行はすべて不可となっています。そのため将来 cc-router の UI が刷新されても、テーマが「半分だけ崩れる」ことはありません。レシートは制限付きの HTML テンプレート + CSS で、公開済みのデータ項目表のみを参照できます（[docs/receipt-api.md](docs/receipt-api.md) を参照）。プロバイダープラグインはプロバイダーの記述で、cc-router の Rust チェッカーで検証されます。インストール前に、入力した API キーがどのドメインに送信されるかが表示されます。
 
@@ -104,7 +106,7 @@ Agent Skills に対応した他の AI ツールを使う場合は、[`agent-skil
 ## コミュニティに投稿する
 
 1. このリポジトリを Fork します。
-2. `plugins/theme/<id>.json`（レシートプラグインは `plugins/receipt/<id>.json`、プロバイダープラグインは `plugins/provider/<id>.json`、料金プラグインは `plugins/pricing/<id>.json`）を新規作成します：
+2. `plugins/theme/<id>.json`（レシートは `plugins/receipt/<id>.json`、プロバイダーは `plugins/provider/<id>.json`、料金は `plugins/pricing/<id>.json`、ルールは `plugins/rules/<id>.json`、通知は `plugins/notifier/<id>.json`）を新規作成します：
 
    ```json
    {
