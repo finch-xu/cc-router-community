@@ -1,19 +1,95 @@
 {
   "$comment": "允许的标签。想要新标签就在同一个 PR 里加一行; id 只能是小写字母、数字、冒号和短横线。",
   "tags": [
-    { "id": "light", "zh": "浅色优先", "en": "Light-first" },
-    { "id": "dark", "zh": "深色优先", "en": "Dark-first" },
-    { "id": "warm", "zh": "暖色", "en": "Warm" },
-    { "id": "cool", "zh": "冷色", "en": "Cool" },
-    { "id": "colorful", "zh": "多彩", "en": "Colorful" },
-    { "id": "minimal", "zh": "极简", "en": "Minimal" },
-    { "id": "high-contrast", "zh": "高对比", "en": "High contrast" },
-    { "id": "hand-drawn", "zh": "手绘", "en": "Hand-drawn" },
-    { "id": "pixel", "zh": "像素", "en": "Pixel" },
-    { "id": "retro", "zh": "复古", "en": "Retro" },
-    { "id": "nature", "zh": "自然", "en": "Nature" },
-    { "id": "seasonal", "zh": "节日 / 季节", "en": "Seasonal" },
-    { "id": "custom-font", "zh": "自带字体", "en": "Custom font" },
-    { "id": "texture", "zh": "带纹理", "en": "Textured" }
+    {
+      "id": "light",
+      "zh": "浅色优先",
+      "en": "Light-first"
+    },
+    {
+      "id": "dark",
+      "zh": "深色优先",
+      "en": "Dark-first"
+    },
+    {
+      "id": "warm",
+      "zh": "暖色",
+      "en": "Warm"
+    },
+    {
+      "id": "cool",
+      "zh": "冷色",
+      "en": "Cool"
+    },
+    {
+      "id": "colorful",
+      "zh": "多彩",
+      "en": "Colorful"
+    },
+    {
+      "id": "minimal",
+      "zh": "极简",
+      "en": "Minimal"
+    },
+    {
+      "id": "high-contrast",
+      "zh": "高对比",
+      "en": "High contrast"
+    },
+    {
+      "id": "hand-drawn",
+      "zh": "手绘",
+      "en": "Hand-drawn"
+    },
+    {
+      "id": "pixel",
+      "zh": "像素",
+      "en": "Pixel"
+    },
+    {
+      "id": "retro",
+      "zh": "复古",
+      "en": "Retro"
+    },
+    {
+      "id": "nature",
+      "zh": "自然",
+      "en": "Nature"
+    },
+    {
+      "id": "seasonal",
+      "zh": "节日 / 季节",
+      "en": "Seasonal"
+    },
+    {
+      "id": "custom-font",
+      "zh": "自带字体",
+      "en": "Custom font"
+    },
+    {
+      "id": "texture",
+      "zh": "带纹理",
+      "en": "Textured"
+    },
+    {
+      "id": "receipt:shop",
+      "zh": "商店小票",
+      "en": "Shop receipt"
+    },
+    {
+      "id": "receipt:ticket",
+      "zh": "票据 / 车票",
+      "en": "Ticket"
+    },
+    {
+      "id": "receipt:fun",
+      "zh": "趣味",
+      "en": "Fun"
+    },
+    {
+      "id": "cute",
+      "zh": "可爱",
+      "en": "Cute"
+    }
   ]
 }

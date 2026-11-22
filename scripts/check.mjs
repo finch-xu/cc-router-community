@@ -33,6 +33,7 @@ registerHooks({
 const imp = (rel) => import(pathToFileURL(join(CCR, rel)).href);
 const { validateManifest, isSafePath, SUPPORTED_TYPES, MANIFEST_FILE } = await imp("src/plugins/manifest.ts");
 const { validateTheme } = await imp("src/plugins/theme/validate.ts");
+const { validateReceipt } = await imp("src/plugins/receipt/validate.ts");
 const { packageHash } = await imp("scripts/lib/plugin-hash.mjs");
 
 const TAGS = JSON.parse(readFileSync(join(ROOT, "schema/tags.json"), "utf8")).tags.map((t) => t.id);
@@ -153,6 +154,20 @@ async function checkEntry(type, file) {
     const t = validateTheme(theme, man.assets);
     errors.push(...t.errors.map((e) => `${man.entry} ${e.path}: ${e.code}${e.detail ? ` (${e.detail})` : ""}`));
     warnings.push(...t.warnings.map((w) => `${man.entry} ${w.path}: ${w.code}`));
+  }
+  if (type === "receipt") {
+    let receipt;
+    try {
+      receipt = JSON.parse(new TextDecoder().decode(files[man.entry]));
+    } catch {
+      errors.push(`${man.entry} 不是合法 JSON`);
+      return fail();
+    }
+    const texts = {};
+    for (const a of man.assets) if (/\.(html|css)$/.test(a)) texts[a] = new TextDecoder("utf-8", { fatal: true }).decode(files[a]);
+    const r = validateReceipt(receipt, man.assets, texts);
+    errors.push(...r.errors.map((e) => `${e.path}: ${e.code}${e.detail ? ` (${e.detail})` : ""}`));
+    warnings.push(...r.warnings.map((w) => `${w.path}: ${w.code}${w.detail ? ` (${w.detail})` : ""}`));
   }
   const size = Object.values(files).reduce((n, b) => n + b.length, 0);
   if (size > BIG) warnings.push(`插件包 ${(size / 1024 / 1024).toFixed(1)} MB, 较大`);

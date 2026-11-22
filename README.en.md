@@ -9,7 +9,7 @@ Plugin types available today:
 | Type | Folder | What it changes |
 |---|---|---|
 | UI theme | `plugins/theme/` | colors, shapes, textures, fonts |
-| Receipt theme | — | coming soon |
+| Receipt theme | `plugins/receipt/` | HTML template + CSS + fonts, see [docs/receipt-api.md](docs/receipt-api.md) |
 
 **Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied.
 
@@ -33,10 +33,12 @@ media/<plugin id>/shot-1.png     ← optional, ≤ 500 KB each, up to 4
 
 `id`: lowercase letters, digits and hyphens (2–40 chars), not a built-in theme name.
 
+Receipt plugins use `"type": "receipt"` and `"entry": "receipt.json"`; see [docs/receipt-api.md](docs/receipt-api.md) and [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery).
+
 ## Submitting
 
 1. Fork this repo.
-2. Add `plugins/theme/<id>.json`:
+2. Add `plugins/theme/<id>.json` (receipts go in `plugins/receipt/<id>.json`):
 
    ```json
    {

@@ -9,16 +9,16 @@
 | 类型 | 目录 | 说明 |
 |---|---|---|
 | 界面主题 | `plugins/theme/` | 颜色、形状、纹理、字体 |
-| 小票主题 | — | 即将开放 |
+| 小票主题 | `plugins/receipt/` | HTML 模板 + CSS + 字体，格式见 [docs/receipt-api.md](docs/receipt-api.md) |
 
-**插件只装数据，不装代码。** 主题只能填写一张公开的 token 表（见 [docs/theme-api.md](docs/theme-api.md)），不能写 CSS 选择器、不能联网、不能运行脚本。所以 cc-router 以后怎么改版，你的主题都不会「只生效一半」。
+**插件只装数据，不装代码。** 主题只能填写一张公开的 token 表（见 [docs/theme-api.md](docs/theme-api.md)），不能写 CSS 选择器、不能联网、不能运行脚本，所以 cc-router 以后怎么改版，你的主题都不会「只生效一半」。小票是受限的 HTML 模板 + CSS，只能读一张公开的数据字段表（见 [docs/receipt-api.md](docs/receipt-api.md)）。
 
 ## 这个仓库里放什么
 
 **只放「指针」和展示图**，插件本体留在你自己的仓库里：
 
 ```
-plugins/theme/<插件 id>.json   ← 你的仓库地址 + 提交号 + 标签
+plugins/theme/<插件 id>.json   ← 你的仓库地址 + 提交号 + 标签 (小票放 plugins/receipt/)
 media/<插件 id>/logo.png        ← 可选, ≤ 100 KB
 media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 ```
@@ -64,10 +64,12 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 
 `id` 只能用小写字母、数字和短横线（2–40 个字符），不能和内置主题重名。
 
+做小票插件：清单写 `"type": "receipt"`、`"entry": "receipt.json"`，模板与样式按 [docs/receipt-api.md](docs/receipt-api.md) 写；完整范例见 cc-router 仓库的 [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery)。安装确认框会用样例数据渲染一张预览。
+
 ## 提交到社区
 
 1. Fork 本仓库。
-2. 新建 `plugins/theme/<id>.json`：
+2. 新建 `plugins/theme/<id>.json`（小票插件放 `plugins/receipt/<id>.json`）：
 
    ```json
    {
