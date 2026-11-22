@@ -1,6 +1,6 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T07:07:17.884Z",
+  "generatedAt": "2026-11-22T12:46:50.125Z",
   "plugins": [
     {
       "id": "sparrow-sun",
@@ -66,6 +66,242 @@
         "version": "1.0.2",
         "commit": "45fae26d8c95ffb1267b4a6703fea71312e78179",
         "sha256": "b4018538aaca34611e3deba5bc9ef30c5fa79fab278537fbd09c6f8ab14177bc"
+      }
+    },
+    {
+      "id": "rules-side-tasks",
+      "type": "rules",
+      "name": {
+        "zh": "杂活走便宜模型",
+        "zh-Hant": "雜事走便宜模型",
+        "en": "Side tasks on a cheap model",
+        "ja": "雑用は安いモデルへ"
+      },
+      "description": {
+        "zh": "规则插件的写法示范：把标题生成、对话压缩、安全检查、网页摘要这类杂活改道到你选的虚拟模型；可选地在发出前屏蔽常见的 API Key。",
+        "zh-Hant": "規則外掛的寫法示範：把標題生成、對話壓縮、安全檢查、網頁摘要這類雜事改道到你選的虛擬模型；可選擇在送出前遮蔽常見的 API Key。",
+        "en": "Shows how to write a rules plugin: send side tasks (titles, compaction, safety checks, web summaries) to a virtual model of your choice, and optionally mask common API keys before requests leave your machine.",
+        "ja": "ルールプラグインの書き方の見本：タイトル生成・会話の圧縮・安全チェック・Web 要約などの雑用を選んだ仮想モデルへ回し、必要なら送信前によくある API キーを伏せ字にします。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/rules-side-tasks",
+      "tags": [
+        "rules:routing",
+        "rules:privacy"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "3384e0903f7997b21d2b8ed9fd404643b377036fbd9fdb5de7bb1bd9bb793d4e"
+      }
+    },
+    {
+      "id": "notifier-bark",
+      "type": "notifier",
+      "name": {
+        "zh": "Bark 推送",
+        "zh-Hant": "Bark 推播",
+        "en": "Bark",
+        "ja": "Bark 通知"
+      },
+      "description": {
+        "zh": "通过 Bark 将 cc-router 告警推送到 iPhone / iPad。",
+        "zh-Hant": "透過 Bark 將 cc-router 警示推播到 iPhone / iPad。",
+        "en": "Push cc-router alerts to iOS devices via Bark.",
+        "ja": "Bark 経由で iOS デバイスに cc-router のアラートを送信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-bark",
+      "tags": [
+        "notifier:mobile",
+        "notifier:self-hosted"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "efcb5172df941b394f0cd32e0b6ae92d46993b2afd5736abb9b9e6b467d62ee1"
+      }
+    },
+    {
+      "id": "notifier-dingtalk",
+      "type": "notifier",
+      "name": {
+        "zh": "钉钉机器人",
+        "zh-Hant": "釘釘機器人",
+        "en": "DingTalk Bot",
+        "ja": "DingTalk Bot"
+      },
+      "description": {
+        "zh": "通过钉钉群自定义机器人接收 cc-router 告警。",
+        "zh-Hant": "透過釘釘群自訂機器人接收 cc-router 警示。",
+        "en": "Send cc-router alerts to a DingTalk custom robot.",
+        "ja": "DingTalk のカスタムボットに cc-router のアラートを送信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-dingtalk",
+      "tags": [
+        "notifier:chat"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "f61590535f9b84b431688c991b874e647d4b7287749d8ab04260e3e7f1db3fd3"
+      }
+    },
+    {
+      "id": "notifier-feishu",
+      "type": "notifier",
+      "name": {
+        "zh": "飞书机器人",
+        "zh-Hant": "飛書機器人",
+        "en": "Feishu Bot",
+        "ja": "Feishu Bot"
+      },
+      "description": {
+        "zh": "通过飞书自定义群机器人 Webhook 接收 cc-router 状态通知。",
+        "zh-Hant": "透過飛書自訂群機器人 Webhook 接收 cc-router 狀態通知。",
+        "en": "Send cc-router alerts to a Feishu group webhook bot.",
+        "ja": "Feishu グループのカスタム Webhook ボットに cc-router の通知を送信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-feishu",
+      "tags": [
+        "notifier:chat"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "d903245f497b6dec5dcdd30071603f4f46bc613da3316dfd7693988a655ac32a"
+      }
+    },
+    {
+      "id": "notifier-ntfy",
+      "type": "notifier",
+      "name": {
+        "zh": "ntfy 推送",
+        "zh-Hant": "ntfy 推播",
+        "en": "ntfy",
+        "ja": "ntfy 通知"
+      },
+      "description": {
+        "zh": "通过 ntfy.sh 或自建 ntfy 服务器接收 cc-router 异常与每日汇总推送。",
+        "zh-Hant": "透過 ntfy.sh 或自建 ntfy 伺服器接收 cc-router 異常與每日摘要推播。",
+        "en": "Send cc-router alerts and daily summaries to ntfy.sh or a self-hosted ntfy server.",
+        "ja": "ntfy.sh またはセルフホストの ntfy サーバーに cc-router のアラートや日次サマリーを送信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-ntfy",
+      "tags": [
+        "notifier:mobile",
+        "notifier:self-hosted"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "7c58e0cbd52eac5aa78090d12fe339dc9451991c8728003e879dcadd52ba61af"
+      }
+    },
+    {
+      "id": "notifier-serverchan",
+      "type": "notifier",
+      "name": {
+        "zh": "Server 酱",
+        "zh-Hant": "Server 醬",
+        "en": "ServerChan",
+        "ja": "ServerChan"
+      },
+      "description": {
+        "zh": "通过 Server 酱将订阅失效、限额与每日汇总推送到微信。",
+        "zh-Hant": "透過 Server 醬將訂閱失效、限額與每日摘要推播到微信。",
+        "en": "Deliver cc-router alerts to WeChat via ServerChan.",
+        "ja": "ServerChan 経由で cc-router の通知を配信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-serverchan",
+      "tags": [
+        "notifier:mobile"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "b9ec88a8632cea63938b496c3981f99c022ac365df6d885c48254ec44dd9f2d5"
+      }
+    },
+    {
+      "id": "notifier-slack",
+      "type": "notifier",
+      "name": {
+        "zh": "Slack Webhook",
+        "zh-Hant": "Slack Webhook",
+        "en": "Slack Webhook",
+        "ja": "Slack Webhook"
+      },
+      "description": {
+        "zh": "通过 Slack Incoming Webhook 将 cc-router 状态发到指定频道。",
+        "zh-Hant": "透過 Slack Incoming Webhook 將 cc-router 狀態發送到指定頻道。",
+        "en": "Post cc-router alerts to a Slack channel via Incoming Webhook.",
+        "ja": "Slack Incoming Webhook でチャンネルに cc-router のアラートを投稿します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-slack",
+      "tags": [
+        "notifier:chat"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "88327a9440bf22ed7f8a7cc66e40c38b2aee7fd199acef6bdc60990c17589593"
+      }
+    },
+    {
+      "id": "notifier-telegram",
+      "type": "notifier",
+      "name": {
+        "zh": "Telegram 机器人",
+        "zh-Hant": "Telegram 機器人",
+        "en": "Telegram Bot",
+        "ja": "Telegram Bot"
+      },
+      "description": {
+        "zh": "通过 Telegram Bot API 发送 cc-router 告警与每日汇总。",
+        "zh-Hant": "透過 Telegram Bot API 發送 cc-router 警示與每日摘要。",
+        "en": "Send cc-router alerts and daily summaries via Telegram Bot API.",
+        "ja": "Telegram Bot API で cc-router のアラートや日次サマリーを送信します。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/notifier-telegram",
+      "tags": [
+        "notifier:chat",
+        "notifier:mobile"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "44f8c4dd20884a5a695809ad380418cee1f6006d",
+        "sha256": "4b45cf32199dd86d65e452eb4049cdf9e413c14a7539e51cb29cbe5fe05830a1"
       }
     }
   ]
