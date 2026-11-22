@@ -19,15 +19,16 @@
 |---|---|---|
 | UIテーマ | `plugins/theme/` | 色・形・テクスチャ・フォント |
 | レシートテーマ | `plugins/receipt/` | HTML テンプレート + CSS + フォント（仕様は [docs/receipt-api.md](docs/receipt-api.md) を参照） |
+| プロバイダー | `plugins/provider/` | cc-router 内蔵プロバイダーと同じ形式のプロバイダー記述（仕様は [docs/provider-api.md](docs/provider-api.md)、中国語）。プロバイダープラグインに対応した cc-router が必要です |
 
-**プラグインに含まれるのはデータのみで、コードは一切実行されません。** テーマは公開済みのトークン表（[docs/theme-api.md](docs/theme-api.md) を参照）を埋めるだけで、CSS セレクタの記述・ネットワーク通信・スクリプト実行はすべて不可となっています。そのため将来 cc-router の UI が刷新されても、テーマが「半分だけ崩れる」ことはありません。レシートは制限付きの HTML テンプレート + CSS で、公開済みのデータ項目表のみを参照できます（[docs/receipt-api.md](docs/receipt-api.md) を参照）。
+**プラグインに含まれるのはデータのみで、コードは一切実行されません。** テーマは公開済みのトークン表（[docs/theme-api.md](docs/theme-api.md) を参照）を埋めるだけで、CSS セレクタの記述・ネットワーク通信・スクリプト実行はすべて不可となっています。そのため将来 cc-router の UI が刷新されても、テーマが「半分だけ崩れる」ことはありません。レシートは制限付きの HTML テンプレート + CSS で、公開済みのデータ項目表のみを参照できます（[docs/receipt-api.md](docs/receipt-api.md) を参照）。プロバイダープラグインはプロバイダーの記述で、cc-router の Rust チェッカーで検証されます。インストール前に、入力した API キーがどのドメインに送信されるかが表示されます。
 
 ## このリポジトリに置くもの
 
 **「ポインタ」と紹介用画像だけ**を置き、プラグイン本体は作者自身のリポジトリに残します：
 
 ```
-plugins/theme/<プラグイン id>.json   ← リポジトリ名 + コミットハッシュ + タグ（レシートは plugins/receipt/）
+plugins/theme/<プラグイン id>.json   ← リポジトリ名 + コミットハッシュ + タグ（レシートは plugins/receipt/、プロバイダーは plugins/provider/）
 media/<プラグイン id>/logo.png        ← 任意、100 KB 以下
 media/<プラグイン id>/shot-1.png      ← 任意、各 500 KB 以下、最大 4 枚
 ```
@@ -97,10 +98,12 @@ Agent Skills に対応した他の AI ツールを使う場合は、[`agent-skil
 
 レシートプラグインを作る場合は、マニフェストに `"type": "receipt"` と `"entry": "receipt.json"` を指定し、[docs/receipt-api.md](docs/receipt-api.md) に沿ってテンプレートとスタイルを記述してください。完全な見本は cc-router リポジトリの [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery) にあります。インストール確認ダイアログではサンプルデータによるプレビューが表示されます。
 
+プロバイダープラグインを作る場合は、マニフェストに `"type": "provider"` と `"entry": "provider.yaml"` を指定し、[docs/provider-api.md](docs/provider-api.md) に沿って記述してください（cc-router 内蔵プロバイダーと同じ形式）。完全な見本は [`examples/plugins/provider-example-relay`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/provider-example-relay) にあります。CI はチェック結果に「API キーの送信先」ドメインを表示し、レビュアーはそれを確認します。
+
 ## コミュニティに投稿する
 
 1. このリポジトリを Fork します。
-2. `plugins/theme/<id>.json`（レシートプラグインは `plugins/receipt/<id>.json`）を新規作成します：
+2. `plugins/theme/<id>.json`（レシートプラグインは `plugins/receipt/<id>.json`、プロバイダープラグインは `plugins/provider/<id>.json`）を新規作成します：
 
    ```json
    {
@@ -133,4 +136,5 @@ Agent Skills に対応した他の AI ツールを使う場合は、[`agent-skil
 
 - アプリはインストール時に指定されたコミットに固定し、内容のハッシュを照合します。あとから作者がリポジトリを変更しても、インストール済みユーザーに無断で影響することはありません。
 - テーマのすべての値は構文の許可リスト（色・長さ・影など）を通過する必要があり、画像とフォントはプラグインパッケージ内に含まれるもののみ使用できます。SVG にはスクリプトや外部リンクを含められません。
+- プロバイダープラグインの URL は https（またはローカルホストへの http）のみで、ホスト名にプレースホルダーは使えません。インストール前に API キーの送信先ドメインが表示され、更新時は追加されたドメインが通知されます。プラグインが更新されても、既存のサブスクの接続先が勝手に変わることはありません。
 - ユーザーはこのカタログを経由せず、任意のリポジトリを「リンクからインストール」で直接導入することもできます。その場合、アプリに「コミュニティの審査を受けていません」という注意が表示されます。

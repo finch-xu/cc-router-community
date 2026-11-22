@@ -90,6 +90,21 @@
       "id": "cute",
       "zh": "可爱",
       "en": "Cute"
+    },
+    {
+      "id": "provider:relay",
+      "zh": "中转站",
+      "en": "Relay"
+    },
+    {
+      "id": "provider:aggregator",
+      "zh": "聚合站",
+      "en": "Aggregator"
+    },
+    {
+      "id": "provider:local",
+      "zh": "本地模型",
+      "en": "Local models"
     }
   ]
 }
