@@ -1,0 +1,26 @@
+name: validate
+
+on:
+  pull_request:
+    paths: ["plugins/**", "media/**", "schema/**", "scripts/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # 校验规则来自 cc-router 主仓库 (与 app 安装时同一份代码)
+      - uses: actions/checkout@v4
+        with:
+          repository: finch-xu/cc-router
+          path: .cc-router
+          sparse-checkout: |
+            src/plugins
+            scripts/lib
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/check.mjs
