@@ -1,6 +1,6 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T04:58:34.612Z",
+  "generatedAt": "2026-11-22T05:19:26.631Z",
   "plugins": [
     {
       "id": "sparrow-sun",
@@ -31,6 +31,37 @@
         "version": "1.0.0",
         "commit": "aa9c901af88334183a32825048d99bbef12d884e",
         "sha256": "c16f1406c797b8f51156439a9acc785a02b80c07300aae10560a84e976fd5f44"
+      }
+    },
+    {
+      "id": "receipt-sparrow-bakery",
+      "type": "receipt",
+      "name": {
+        "zh": "麻雀面包房",
+        "zh-Hant": "麻雀麵包房",
+        "en": "Sparrow Bakery",
+        "ja": "スズメベーカリー"
+      },
+      "description": {
+        "zh": "每天新鲜出炉的 token。小票插件的写法示范：循环、条件、二维码、logo 与内置字体。",
+        "zh-Hant": "每天新鮮出爐的 token。小票外掛的寫法示範：迴圈、條件、QR Code、logo 與內建字型。",
+        "en": "Fresh tokens, baked daily. Shows how to write a receipt plugin: loops, conditions, QR code, logo and built-in fonts.",
+        "ja": "毎日焼きたてのトークン。レシートプラグインの書き方の見本：ループ・条件・QR コード・ロゴ・内蔵フォント。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/receipt-sparrow-bakery",
+      "tags": [
+        "receipt:shop",
+        "cute",
+        "warm"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "5fcda12200e745c380f29e74b6d4b1696d28fceb",
+        "sha256": "46d9d7ff5e3aa86b32d1b71feefed5166a53c82c5406ef7b0e06a10fba0e3bb6"
       }
     }
   ]
