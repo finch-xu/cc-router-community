@@ -21,6 +21,8 @@
 | 小票主题 | `plugins/receipt/` | HTML 模板 + CSS + 字体，格式见 [docs/receipt-api.md](docs/receipt-api.md) |
 | 厂商 | `plugins/provider/` | 一份厂商描述（与内置厂商同格式），格式见 [docs/provider-api.md](docs/provider-api.md)；需要 cc-router 支持厂商插件的版本 |
 | 计价 | `plugins/pricing/` | 一张价格表，用来估算费用，格式见 [docs/pricing-api.md](docs/pricing-api.md)；cc-router 本身不带任何价格 |
+| 规则 | `plugins/rules/` | 一组声明式条件与动作，在代理管线内按请求改道、调参或脱敏，格式见 [docs/rules-api.md](docs/rules-api.md) |
+| 通知 | `plugins/notifier/` | 声明式 HTTP 推送模板，将异常与每日汇总推送到手机或群聊，格式见 [docs/notifier-api.md](docs/notifier-api.md) |
 
 **插件只装数据，不装代码。** 主题只能填写一张公开的 token 表（见 [docs/theme-api.md](docs/theme-api.md)），不能写 CSS 选择器、不能联网、不能运行脚本，所以 cc-router 以后怎么改版，你的主题都不会「只生效一半」。小票是受限的 HTML 模板 + CSS，只能读一张公开的数据字段表（见 [docs/receipt-api.md](docs/receipt-api.md)）。厂商插件是一份厂商描述，由 cc-router 的 Rust 检查器校验；用户安装时会看到「你填写的 API Key 会发往哪些域名」。
 
@@ -104,7 +106,7 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 ## 提交到社区
 
 1. Fork 本仓库。
-2. 新建 `plugins/theme/<id>.json`（小票插件放 `plugins/receipt/<id>.json`，厂商插件放 `plugins/provider/<id>.json`，计价插件放 `plugins/pricing/<id>.json`）：
+2. 新建 `plugins/theme/<id>.json`（小票放 `plugins/receipt/<id>.json`，厂商放 `plugins/provider/<id>.json`，计价放 `plugins/pricing/<id>.json`，规则放 `plugins/rules/<id>.json`，通知放 `plugins/notifier/<id>.json`）：
 
    ```json
    {

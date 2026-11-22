@@ -8,7 +8,7 @@
 // 与 app 安装时跑的是同一份代码, 两边不会对不上。需要 Node 22.18+ (原生 TS type stripping)。
 // 环境变量 CC_ROUTER_DIR 可指向本地的 cc-router 检出 (默认 ./.cc-router)。
 //
-// 系统插件 (厂商插件 `provider`、计价插件 `pricing`) 的内容由 cc-router 的 Rust 检查器校验 (app 安装时同一份规则):
+// 系统插件 (厂商 `provider`、计价 `pricing`、规则 `rules`、通知 `notifier`) 的内容由 cc-router 的 Rust 检查器校验 (app 安装时同一份规则):
 // 环境变量 CCR_PLUGIN_CHECK 指向编好的 `ccr-plugin-check` 二进制 (CI 只在有厂商条目时才编译它)。
 import { registerHooks } from "node:module";
 import { appendFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
@@ -49,7 +49,7 @@ const BIG = 8 * 1024 * 1024;
 const isObj = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
 
 /** 由 Rust 校验内容的类型 (与 cc-router `plugin.rs::SYSTEM_TYPES` 一致)。 */
-const RUST_CHECKED = ["provider", "pricing"];
+const RUST_CHECKED = ["provider", "pricing", "rules", "notifier"];
 
 /**
  * 把下载到的包写进临时目录, 交给 `ccr-plugin-check`。返回 { errors, keyHosts }。
@@ -215,6 +215,12 @@ async function checkEntry(type, file) {
     const caps = r.capabilities;
     if (caps?.kind === "pricing") {
       warnings.push(`价格表 ${caps.currency}, ${caps.rules} 条, 覆盖: ${caps.providers.join(", ")} — 请抽查几条价格是否与厂商官网一致`);
+    } else if (caps?.kind === "rules") {
+      const redir = caps.redirects_to?.length ? ` · 改道: ${caps.redirects_to.join(", ")}` : "";
+      warnings.push(`规则 ${caps.rules} 条 · 钩子: ${(caps.hooks ?? []).join(", ")} · 动作: ${(caps.actions ?? []).join(", ")}${redir}`);
+    } else if (caps?.kind === "notifier") {
+      const hosts = [...(caps.hosts ?? []), ...(caps.base_url_params ?? []).map((p) => `{{params.${p}}}`)].join(", ");
+      warnings.push(`目标: ${hosts} · 事件: ${(caps.events ?? []).join(", ")} · 字段: ${(caps.fields ?? []).join(", ")}`);
     }
   }
   const size = Object.values(files).reduce((n, b) => n + b.length, 0);
