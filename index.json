@@ -1,6 +1,6 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T05:36:33.327Z",
+  "generatedAt": "2026-11-22T05:44:34.721Z",
   "plugins": [
     {
       "id": "sparrow-sun",
@@ -59,9 +59,9 @@
       ],
       "screenshots": [],
       "latest": {
-        "version": "1.0.1",
-        "commit": "8c77ebc146fec2461a2ffa592ade4ff7b507e11b",
-        "sha256": "081e06d1d61b48170b15d9a6fb5482574e3590e611f27f3e7a17d1cd34ec39dc"
+        "version": "1.0.2",
+        "commit": "45fae26d8c95ffb1267b4a6703fea71312e78179",
+        "sha256": "b4018538aaca34611e3deba5bc9ef30c5fa79fab278537fbd09c6f8ab14177bc"
       }
     }
   ]
