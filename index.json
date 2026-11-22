@@ -1,6 +1,6 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T12:46:50.125Z",
+  "generatedAt": "2026-11-22T13:21:14.736Z",
   "plugins": [
     {
       "id": "sparrow-sun",
@@ -66,6 +66,36 @@
         "version": "1.0.2",
         "commit": "45fae26d8c95ffb1267b4a6703fea71312e78179",
         "sha256": "b4018538aaca34611e3deba5bc9ef30c5fa79fab278537fbd09c6f8ab14177bc"
+      }
+    },
+    {
+      "id": "model-pricing",
+      "type": "pricing",
+      "name": {
+        "zh": "全球模型价格表（USD）",
+        "zh-Hant": "全球模型價格表（USD）",
+        "en": "Global Model Pricing (USD)",
+        "ja": "グローバルモデル料金表（USD）"
+      },
+      "description": {
+        "zh": "基于 models.dev（辅以 OpenRouter 与 LiteLLM 补齐）生成的全量 USD 计价表，覆盖主流海内外厂商与常见中转模型，含缓存读写价格。最近同步：2026-11-22。",
+        "zh-Hant": "基於 models.dev（輔以 OpenRouter 與 LiteLLM 補齊）生成的全量 USD 計價表，覆蓋主流海內外廠商與常見中轉模型，含快取讀寫價格。最近同步：2026-11-22。",
+        "en": "Comprehensive USD pricing table generated from models.dev (supplemented by OpenRouter and LiteLLM), covering major global & China providers plus wildcard fallbacks with cache read/write rates. Last synced: 2026-11-22.",
+        "ja": "models.dev（OpenRouter・LiteLLM で補完）から生成した包括的な USD 料金表。主要プロバイダとキャッシュ読込・書込料金に対応。最終同期：2026-11-22。"
+      },
+      "author": "finch-xu",
+      "license": "MIT",
+      "homepage": "https://github.com/finch-xu/cc-router-model-pricing",
+      "repo": "finch-xu/cc-router-model-pricing",
+      "tags": [
+        "pricing:usd",
+        "pricing:global"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "ba74a47c980d374ac0be32a217382b0772eb88c6",
+        "sha256": "0147c9c133a9e5aaa11d56853053ca3736f82a20edf71e6eea825634679a7230"
       }
     },
     {
