@@ -1,8 +1,12 @@
-# cc-router Community
+<p align="center">
+  <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="420">
+</p>
 
-[中文](README.md)
+<p align="center"><b>The cc-router community plugin center</b> · <a href="README.md">中文</a></p>
 
-The catalog behind the plugin store of [cc-router](https://github.com/finch-xu/cc-router). The app's **Plugins** page reads the `index.json` generated from this repository.
+# Sparrow Bakery
+
+**Sparrow Bakery** is the catalog behind the plugin store of [cc-router](https://github.com/finch-xu/cc-router). The app's **Plugins** page reads the `index.json` generated from this repository.
 
 Plugin types available today:
 

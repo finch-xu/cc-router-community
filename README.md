@@ -1,8 +1,12 @@
-# cc-router 社区
+<p align="center">
+  <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="420">
+</p>
 
-[English](README.en.md)
+<p align="center"><b>cc-router 的社区插件中心</b> · <a href="README.en.md">English</a></p>
 
-这里是 [cc-router](https://github.com/finch-xu/cc-router) 插件商店的目录。app 里的「插件」页读的就是这个仓库生成的 `index.json`。
+# Sparrow Bakery
+
+这里是 [cc-router](https://github.com/finch-xu/cc-router) 插件商店的目录，名叫 **Sparrow Bakery**。app 里的「插件」页读的就是这个仓库生成的 `index.json`。
 
 目前开放的插件类型：
 

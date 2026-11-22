@@ -1,8 +1,11 @@
 {
   "name": "cc-router-community",
-  "owner": { "name": "cc-router", "url": "https://github.com/finch-xu/cc-router" },
+  "owner": {
+    "name": "cc-router",
+    "url": "https://github.com/finch-xu/cc-router"
+  },
   "metadata": {
-    "description": "Tools for the cc-router plugin community."
+    "description": "Sparrow Bakery — the cc-router community plugin center."
   },
   "plugins": [
     {
