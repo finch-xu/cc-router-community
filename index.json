@@ -1,5 +1,37 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T00:00:00.000Z",
-  "plugins": []
+  "generatedAt": "2026-11-22T04:58:34.612Z",
+  "plugins": [
+    {
+      "id": "sparrow-sun",
+      "type": "theme",
+      "name": {
+        "zh": "晒太阳的麻雀",
+        "zh-Hant": "曬太陽的麻雀",
+        "en": "Sunbathing Sparrow",
+        "ja": "日向ぼっこのスズメ"
+      },
+      "description": {
+        "zh": "内置「麻雀」主题的插件版，示范 theme.json 的写法。",
+        "zh-Hant": "內建「麻雀」主題的外掛版，示範 theme.json 的寫法。",
+        "en": "Plugin version of the built-in Sparrow theme, showing how to write a theme.json.",
+        "ja": "内蔵テーマ「スズメ」のプラグイン版。theme.json の書き方の見本です。"
+      },
+      "author": "cc-router",
+      "license": "MIT",
+      "repo": "finch-xu/cc-router",
+      "path": "examples/plugins/sparrow-sun",
+      "tags": [
+        "warm",
+        "light",
+        "nature"
+      ],
+      "screenshots": [],
+      "latest": {
+        "version": "1.0.0",
+        "commit": "aa9c901af88334183a32825048d99bbef12d884e",
+        "sha256": "c16f1406c797b8f51156439a9acc785a02b80c07300aae10560a84e976fd5f44"
+      }
+    }
+  ]
 }
