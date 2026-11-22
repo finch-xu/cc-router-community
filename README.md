@@ -19,15 +19,16 @@
 |---|---|---|
 | 界面主题 | `plugins/theme/` | 颜色、形状、纹理、字体 |
 | 小票主题 | `plugins/receipt/` | HTML 模板 + CSS + 字体，格式见 [docs/receipt-api.md](docs/receipt-api.md) |
+| 厂商 | `plugins/provider/` | 一份厂商描述（与内置厂商同格式），格式见 [docs/provider-api.md](docs/provider-api.md)；需要 cc-router 支持厂商插件的版本 |
 
-**插件只装数据，不装代码。** 主题只能填写一张公开的 token 表（见 [docs/theme-api.md](docs/theme-api.md)），不能写 CSS 选择器、不能联网、不能运行脚本，所以 cc-router 以后怎么改版，你的主题都不会「只生效一半」。小票是受限的 HTML 模板 + CSS，只能读一张公开的数据字段表（见 [docs/receipt-api.md](docs/receipt-api.md)）。
+**插件只装数据，不装代码。** 主题只能填写一张公开的 token 表（见 [docs/theme-api.md](docs/theme-api.md)），不能写 CSS 选择器、不能联网、不能运行脚本，所以 cc-router 以后怎么改版，你的主题都不会「只生效一半」。小票是受限的 HTML 模板 + CSS，只能读一张公开的数据字段表（见 [docs/receipt-api.md](docs/receipt-api.md)）。厂商插件是一份厂商描述，由 cc-router 的 Rust 检查器校验；用户安装时会看到「你填写的 API Key 会发往哪些域名」。
 
 ## 这个仓库里放什么
 
 **只放「指针」和展示图**，插件本体留在你自己的仓库里：
 
 ```
-plugins/theme/<插件 id>.json   ← 你的仓库地址 + 提交号 + 标签 (小票放 plugins/receipt/)
+plugins/theme/<插件 id>.json   ← 你的仓库地址 + 提交号 + 标签 (小票放 plugins/receipt/, 厂商放 plugins/provider/)
 media/<插件 id>/logo.png        ← 可选, ≤ 100 KB
 media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 ```
@@ -97,10 +98,12 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 
 做小票插件：清单写 `"type": "receipt"`、`"entry": "receipt.json"`，模板与样式按 [docs/receipt-api.md](docs/receipt-api.md) 写；完整范例见 cc-router 仓库的 [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery)。安装确认框会用样例数据渲染一张预览。
 
+做厂商插件：清单写 `"type": "provider"`、`"entry": "provider.yaml"`，描述按 [docs/provider-api.md](docs/provider-api.md) 写（与 cc-router 内置厂商同一份格式）；完整范例见 cc-router 仓库的 [`examples/plugins/provider-example-relay`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/provider-example-relay)。CI 会在检查摘要里列出「API Key 会发往」的域名，审核员据此核对。
+
 ## 提交到社区
 
 1. Fork 本仓库。
-2. 新建 `plugins/theme/<id>.json`（小票插件放 `plugins/receipt/<id>.json`）：
+2. 新建 `plugins/theme/<id>.json`（小票插件放 `plugins/receipt/<id>.json`，厂商插件放 `plugins/provider/<id>.json`）：
 
    ```json
    {
@@ -133,4 +136,5 @@ media/<插件 id>/shot-1.png      ← 可选, 每张 ≤ 500 KB, 最多 4 张
 
 - app 安装时固定在你填的那次提交，并核对内容哈希；作者之后改仓库不会悄悄影响已安装的用户。
 - 主题的每个值都要通过语法白名单（颜色 / 长度 / 阴影等），图片与字体只能来自插件包内，SVG 不能带脚本或外链。
+- 厂商插件的地址只能是 https（或指向本机的 http），域名里不能有占位符；用户安装前会看到 API Key 会发往哪些域名，更新时会提示新增的域名；已有订阅的连接不会因插件更新而悄悄改变。
 - 用户也可以不经过本目录，直接「从链接安装」任何仓库；app 会提示「未经社区审核」。

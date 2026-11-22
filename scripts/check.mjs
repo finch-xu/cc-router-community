@@ -7,9 +7,14 @@
 // 校验规则不在本仓库: 直接 import cc-router 主仓库的 src/plugins/*.ts (CI 把它检出到 .cc-router/),
 // 与 app 安装时跑的是同一份代码, 两边不会对不上。需要 Node 22.18+ (原生 TS type stripping)。
 // 环境变量 CC_ROUTER_DIR 可指向本地的 cc-router 检出 (默认 ./.cc-router)。
+//
+// 系统插件 (目前是厂商插件 `provider`) 的内容由 cc-router 的 Rust 检查器校验 (app 安装时同一份规则):
+// 环境变量 CCR_PLUGIN_CHECK 指向编好的 `ccr-plugin-check` 二进制 (CI 只在有厂商条目时才编译它)。
 import { registerHooks } from "node:module";
-import { appendFileSync, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { appendFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -42,6 +47,37 @@ const MAX_SHOTS = 4;
 const BIG = 8 * 1024 * 1024;
 
 const isObj = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
+
+/** 由 Rust 校验内容的类型 (与 cc-router `plugin.rs::SYSTEM_TYPES` 一致)。 */
+const RUST_CHECKED = ["provider"];
+
+/**
+ * 把下载到的包写进临时目录, 交给 `ccr-plugin-check`。返回 { errors, keyHosts }。
+ * 检查器的 JSON: { ok, issues: [{ path, code, detail? }], capabilities?: { key_hosts: [{ host, used_for, differs_from_messages }] } }
+ */
+function rustCheck(files) {
+  const bin = process.env.CCR_PLUGIN_CHECK;
+  if (!bin || !isFile(bin)) return { errors: ["需要 cc-router 的 Rust 检查器 (CCR_PLUGIN_CHECK), CI 里应该已经编好, 请联系维护者"], keyHosts: [] };
+  const dir = mkdtempSync(join(tmpdir(), "ccr-plugin-"));
+  try {
+    for (const [p, bytes] of Object.entries(files)) {
+      mkdirSync(dirname(join(dir, p)), { recursive: true });
+      writeFileSync(join(dir, p), bytes);
+    }
+    const r = spawnSync(bin, [dir], { encoding: "utf8" });
+    let out;
+    try {
+      out = JSON.parse(r.stdout);
+    } catch {
+      return { errors: [`Rust 检查器没有输出合法 JSON (exit ${r.status}): ${(r.stderr || r.stdout).slice(0, 300)}`], keyHosts: [] };
+    }
+    const errors = (out.issues ?? []).map((i) => `${i.path || "(root)"}: ${i.code}${i.detail ? ` (${i.detail})` : ""}`);
+    if (out.ok === false && errors.length === 0) errors.push("Rust 检查器判定不通过");
+    return { errors, keyHosts: out.capabilities?.key_hosts ?? [] };
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
 const raw = (repo, commit, path) => `https://raw.githubusercontent.com/${repo}/${commit}/${path}`;
 
 async function fetchBytes(url) {
@@ -169,6 +205,14 @@ async function checkEntry(type, file) {
     errors.push(...r.errors.map((e) => `${e.path}: ${e.code}${e.detail ? ` (${e.detail})` : ""}`));
     warnings.push(...r.warnings.map((w) => `${w.path}: ${w.code}${w.detail ? ` (${w.detail})` : ""}`));
   }
+  if (RUST_CHECKED.includes(type)) {
+    const r = rustCheck(files);
+    errors.push(...r.errors);
+    // 给审核员看: 用户填的 API Key 会发往哪里 (与 app 安装确认框里显示的同一份)
+    for (const h of r.keyHosts) {
+      warnings.push(`API Key 会发往 ${h.host} (${h.used_for.join(" / ")})${h.differs_from_messages ? " — 与对话地址不同, 请审核" : ""}`);
+    }
+  }
   const size = Object.values(files).reduce((n, b) => n + b.length, 0);
   if (size > BIG) warnings.push(`插件包 ${(size / 1024 / 1024).toFixed(1)} MB, 较大`);
   if (errors.length) return fail();
@@ -185,6 +229,7 @@ async function checkEntry(type, file) {
       description: man.description,
       author: man.author,
       license: man.license,
+      homepage: man.homepage,
       repo: entry.repo,
       path: entry.path,
       tags,
@@ -211,7 +256,10 @@ for (const type of SUPPORTED_TYPES) {
   for (const f of readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) results.push(await checkEntry(type, f));
 }
 for (const d of readdirSync(join(ROOT, "plugins"))) {
-  if (statSync(join(ROOT, "plugins", d)).isDirectory() && !SUPPORTED_TYPES.includes(d)) {
+  const full = join(ROOT, "plugins", d);
+  // 只有 .gitkeep 的空目录不算 (可以先建好目录, 等 cc-router 发版支持这个类型后再收条目)
+  const hasEntries = statSync(full).isDirectory() && readdirSync(full).some((f) => f.endsWith(".json"));
+  if (hasEntries && !SUPPORTED_TYPES.includes(d)) {
     results.push({ id: d, type: d, errors: [`plugins/${d}/: cc-router 还不支持这种插件类型`], warnings: [], index: null });
   }
 }

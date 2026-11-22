@@ -1,3 +1,4 @@
 .cc-router/
 node_modules/
 .DS_Store
+.cc-router-rust/

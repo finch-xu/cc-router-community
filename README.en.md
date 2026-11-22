@@ -19,15 +19,16 @@ Plugin types available today:
 |---|---|---|
 | UI theme | `plugins/theme/` | colors, shapes, textures, fonts |
 | Receipt theme | `plugins/receipt/` | HTML template + CSS + fonts, see [docs/receipt-api.md](docs/receipt-api.md) |
+| Provider | `plugins/provider/` | A provider description in the same format as cc-router's built-in providers, see [docs/provider-api.md](docs/provider-api.md) (Chinese); needs a cc-router version with provider plugin support |
 
-**Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied. Receipts are restricted HTML templates + CSS that can only read a published table of data fields ([docs/receipt-api.md](docs/receipt-api.md)).
+**Plugins are data, never code.** A theme can only fill in a published token table ([docs/theme-api.md](docs/theme-api.md)) — no CSS selectors, no network access, no scripts. That's why redesigns of cc-router won't leave your theme half-applied. Receipts are restricted HTML templates + CSS that can only read a published table of data fields ([docs/receipt-api.md](docs/receipt-api.md)). A provider plugin is a provider description checked by cc-router's Rust checker; before installing, users see which domains will receive the API key they enter.
 
 ## What lives here
 
 Only **pointers** and showcase images; the plugin itself stays in your own repository:
 
 ```
-plugins/theme/<plugin id>.json   ← your repo + commit + tags (receipts go in plugins/receipt/)
+plugins/theme/<plugin id>.json   ← your repo + commit + tags (receipts go in plugins/receipt/, providers in plugins/provider/)
 media/<plugin id>/logo.png       ← optional, ≤ 100 KB
 media/<plugin id>/shot-1.png     ← optional, ≤ 500 KB each, up to 4
 ```
@@ -97,10 +98,12 @@ Using another AI tool that supports Agent Skills? Copy the folders under [`agent
 
 For receipt plugins, set `"type": "receipt"` and `"entry": "receipt.json"`, and write the template and styles per [docs/receipt-api.md](docs/receipt-api.md); full example: [`examples/plugins/receipt-sparrow-bakery`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/receipt-sparrow-bakery) in the cc-router repo. The install confirmation dialog renders a preview using sample data.
 
+For provider plugins, set `"type": "provider"` and `"entry": "provider.yaml"`, and write the description per [docs/provider-api.md](docs/provider-api.md) (same format as cc-router's built-in providers); full example: [`examples/plugins/provider-example-relay`](https://github.com/finch-xu/cc-router/tree/main/examples/plugins/provider-example-relay). CI lists the domains that will receive the API key in the check summary for reviewers.
+
 ## Submitting
 
 1. Fork this repo.
-2. Add `plugins/theme/<id>.json` (receipts go in `plugins/receipt/<id>.json`):
+2. Add `plugins/theme/<id>.json` (receipts go in `plugins/receipt/<id>.json`, providers in `plugins/provider/<id>.json`):
 
    ```json
    {
@@ -133,4 +136,5 @@ Update your repo and bump `version` in the manifest, then open a PR appending th
 
 - When installed, the app pins the exact commit you listed and verifies the content hash; later changes to your repo will not silently affect installed users.
 - Every theme value must pass a syntax allowlist (colors, lengths, shadows, etc.), images and fonts must come from inside the plugin package, and SVGs cannot contain scripts or external links.
+- Provider plugins may only use https URLs (or http to localhost) with no placeholders in the host. Users see which domains will receive their API key before installing, updates flag newly added domains, and existing subscriptions never change where they connect just because a plugin was updated.
 - Users can also bypass this catalog and use **Install from link** for any repository directly; the app will warn that it is unreviewed by the community.
