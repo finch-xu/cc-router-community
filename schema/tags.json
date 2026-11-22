@@ -130,6 +130,21 @@
       "id": "notifier:self-hosted",
       "zh": "支持自建",
       "en": "Self-hosted"
+    },
+    {
+      "id": "pricing:usd",
+      "zh": "美元计价",
+      "en": "USD pricing"
+    },
+    {
+      "id": "pricing:cny",
+      "zh": "人民币计价",
+      "en": "CNY pricing"
+    },
+    {
+      "id": "pricing:global",
+      "zh": "全球厂商",
+      "en": "Global providers"
     }
   ]
 }

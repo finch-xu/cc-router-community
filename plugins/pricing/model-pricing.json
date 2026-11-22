@@ -1,0 +1,7 @@
+{
+  "repo": "finch-xu/cc-router-model-pricing",
+  "tags": ["pricing:usd", "pricing:global"],
+  "versions": [
+    { "commit": "ba74a47c980d374ac0be32a217382b0772eb88c6" }
+  ]
+}

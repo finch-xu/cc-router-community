@@ -20,7 +20,7 @@ Official example: [`examples/plugins/pricing-sample`](https://github.com/finch-x
 {
   "pricingApi": 1,
   "currency": "USD",
-  "unit": "per_million_tokens",
+  "per": 1000000,
   "prices": [
     {
       "provider": "anthropic",
