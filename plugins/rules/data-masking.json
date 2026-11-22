@@ -1,0 +1,7 @@
+{
+  "repo": "finch-xu/cc-router-data-masking",
+  "tags": ["rules:privacy"],
+  "versions": [
+    { "commit": "e3d5042fd06dcf184be8a083f2facff7ee86f070" }
+  ]
+}
