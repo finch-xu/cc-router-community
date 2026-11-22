@@ -1,15 +1,9 @@
-<table align="center">
-  <tr>
-    <td align="center" valign="bottom" width="300">
-      <img src="assets/cc-router-logo.svg" alt="cc-router" height="120"><br>
-      <b>cc-router Community</b>
-    </td>
-    <td align="center" valign="bottom" width="300">
-      <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="260"><br>
-      <b>Sparrow Bakery</b>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="assets/header-cc-router.svg" alt="cc-router" width="300" height="130">&emsp;<img src="assets/header-divider.svg" alt="" width="2" height="130">&emsp;<img src="assets/header-sparrow-bakery.svg" alt="Sparrow Bakery" width="300" height="130">
+</p>
+<p align="center">
+  <b>cc-router Community</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;<b>Sparrow Bakery</b>&emsp;&ensp;
+</p>
 
 <p align="center"><a href="README.md">中文</a></p>
 
