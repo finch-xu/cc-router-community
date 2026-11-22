@@ -1,6 +1,6 @@
 {
   "index": 1,
-  "generatedAt": "2026-11-22T05:44:34.721Z",
+  "generatedAt": "2026-11-22T07:07:17.884Z",
   "plugins": [
     {
       "id": "sparrow-sun",
@@ -26,7 +26,9 @@
         "light",
         "nature"
       ],
-      "screenshots": [],
+      "screenshots": [
+        "media/sparrow-sun/shot-1.png"
+      ],
       "latest": {
         "version": "1.0.0",
         "commit": "aa9c901af88334183a32825048d99bbef12d884e",
@@ -57,7 +59,9 @@
         "cute",
         "warm"
       ],
-      "screenshots": [],
+      "screenshots": [
+        "media/receipt-sparrow-bakery/shot-1.png"
+      ],
       "latest": {
         "version": "1.0.2",
         "commit": "45fae26d8c95ffb1267b4a6703fea71312e78179",
