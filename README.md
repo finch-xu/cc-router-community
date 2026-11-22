@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="420">
+  <img src="assets/readme-banner.svg" alt="cc-router 社区 · Sparrow Bakery 麻雀面包坊" width="880">
 </p>
 
-<p align="center"><b>cc-router 的社区插件中心</b> · <a href="README.en.md">English</a></p>
+<p align="center"><a href="README.en.md">English</a></p>
 
 # Sparrow Bakery
 

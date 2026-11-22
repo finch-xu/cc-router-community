@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/sparrow-bakery.svg" alt="Sparrow Bakery" width="420">
+  <img src="assets/readme-banner.svg" alt="cc-router community · Sparrow Bakery" width="880">
 </p>
 
-<p align="center"><b>The cc-router community plugin center</b> · <a href="README.md">中文</a></p>
+<p align="center"><a href="README.md">中文</a></p>
 
 # Sparrow Bakery
 
